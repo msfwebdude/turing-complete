@@ -16,6 +16,10 @@ $(document).ready(
     $("#running").on('change', toggleRunState)
 
     self.dataBody.interval = self.setInterval(execute, 1000)
+
+    // set dynamic content
+    const dateCurrent = new Date();
+    self.currentYear.innerHTML = dateCurrent.getFullYear();
   }
 )
 
@@ -98,7 +102,6 @@ function instructionChange(t){
   
   console.log(step)
 }
-
 
 function execute(){
   
