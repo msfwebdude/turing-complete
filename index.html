@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Turing Complete</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="./assets/js/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+</head>
+<body>
+  <p><br /></p>
+  <div class="arena">
+    <div class="header"><h1>Turing Complete</h1></div>
+    <div class="status">
+      <table class="statusTable">
+        <tr>
+          <td style="width: 200px;">
+            <label for="state">State: </label>
+            <output id="state">Stopped</output>
+          </td>
+          <td style="width: 200px;">
+            <label for="steps">Steps: </label>
+            <output id="steps">0</output>
+          </td>
+          <td style="width: 200px;">
+            <label for="point">Current Step: </label>
+            <output id="point">0</output>
+          </td>
+          <td style="width: 200px;">
+            <label for="alpha">Register A: </label>
+            <output id="alpha">0</output>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="queue" class="queue">&nbsp;</div>
+    <div class="commands">
+      <table class="commandsTable">
+        <tr>
+          <td style="width: 200px;">
+            <button id="addStep">Add Step</button>
+          </td>
+          <td style="width: 200px;">
+            <div class="onoffswitch">
+              <input type="checkbox" name="running" class="onoffswitch-checkbox" id="running" onchange="toggleRunState()" tabindex="0">
+              <label class="onoffswitch-label" for="running">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+              </label>
+          </div>      
+          </td>
+          <td style="width: 200px">
+            <button id="loadTest">Load Test Program</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="footer">
+      Project on <a href="https://github.com/msfwebdude/turing-complete" target="_blank">GitHub</a>&nbsp;|&nbsp;
+      <a href="https://github.com/msfwebdude/turing-complete" target="_blank">
+          <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/msfwebdude/turing-complete?color=silver&style=plastic">
+      </a>
+      <a href="https://github.com/msfwebdude/turing-complete/blob/master/LICENSE" target="_blank">
+          <img src="https://img.shields.io/github/license/msfwebdude/turing-complete?color=silver&style=plastic" alt="GitHub">
+      </a>&nbsp;|&nbsp;
+      Updated:&nbsp;<span id="DateUpdated">{DateUpdated}</span>&nbsp;|&nbsp;
+      &copy;&nbsp;<span id="currentYear"></span>&nbsp;Mike&nbsp;Firoved
+      
+  </div>
+  </div>
+  <p><br /></p>
+</body>
+</html> 
