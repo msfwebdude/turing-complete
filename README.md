@@ -3,4 +3,6 @@ To me what this means is having a set of simple instructions that can handle flo
 
 This JavaScript implementation of an instruction stack is simple. There is one Register, A and a set of simple instructions. 
 
+more to come...
+
 See this live [here](http://firoved.com/github/turing-complete/)
