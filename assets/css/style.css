@@ -70,6 +70,10 @@ html {
   margin: auto auto;
 }
 
+.statusLabels {
+  font-weight: bold;
+}
+
 .commands {
   padding-left: 16px;
   margin-top: 16px;

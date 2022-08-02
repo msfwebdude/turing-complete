@@ -4,7 +4,8 @@ self.dataBody = {
   running:     false,
   interval:    null,
   registerA:   0,
-  currentStep: 0
+  currentStep: 0,
+  output:      0
 }
 
 
@@ -45,6 +46,7 @@ function add(){
       <option value="DEC">Decrement (-)</option>
       <option value="JMP">Jump:</option>
       <option value="JZR">Jump if Zero:</option>
+      <option value="STA">Output Reg. A:</option>
     <select><br />
     <label for="txt${id}" id="lbl${id}" class="instructionLabel" style="display: none;">Steps</label>
     <input type="number"  id="txt${id}" class="instructionText"  style="display: none;" onchange="instructionChange(this)">
@@ -138,6 +140,11 @@ function execute(){
       case "JZR":
         if (self.dataBody.registerA == 0) self.dataBody.currentStep += Number(self[`txt${step.id}`].value)
         break;
+
+      case "STA":
+        self.dataBody.output = self.dataBody.registerA
+        break;
+
     }
 
     self.dataBody.currentStep++
@@ -156,6 +163,7 @@ function recalcStats(){
   self.alpha.innerHTML = self.dataBody.registerA
   self.point.innerHTML = self.dataBody.currentStep + 1
   self.state.innerHTML = (self.dataBody.running ? 'Running' : 'Stopped')
+  self.yield.innerHTML = self.dataBody.output
   self.running.checked = self.dataBody.running 
 }
 
