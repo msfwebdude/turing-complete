@@ -38,18 +38,25 @@ function add(){
   var div = document.createElement('div')
   div.className="instruction"
   div.id = `step${id}`
-  div.innerHTML = `Step&nbsp;${ord}<br />
-    <select id="sel${id}" onchange="instructionChange(this)" class="instructionSel">
-      <option value="">SELECT</option>
-      <option value="BRK">Break</option>
-      <option value="INC">Increment (+)</option>
-      <option value="DEC">Decrement (-)</option>
-      <option value="JMP">Jump:</option>
-      <option value="JZR">Jump if Zero:</option>
-      <option value="STA">Output Reg. A:</option>
-    <select><br />
-    <label for="txt${id}" id="lbl${id}" class="instructionLabel" style="display: none;">Steps</label>
-    <input type="number"  id="txt${id}" class="instructionText"  style="display: none;" onchange="instructionChange(this)">
+  div.innerHTML = `
+    <div class="deleteStep" onclick="removeStep('${id}')">&#x2716;</div>
+    <div class="stepTitle" id="stt${id}">Step&nbsp;${ord}</div>
+    <div style="margin-bottom: 3px;">
+      <select id="sel${id}" onchange="instructionChange(this)" class="instructionSel">
+        <option value="">SELECT</option>
+        <option value="LDA">Load A Register</option>
+        <option value="BRK">Break</option>
+        <option value="INC">Increment (+)</option>
+        <option value="DEC">Decrement (-)</option>
+        <option value="JMP">Jump:</option>
+        <option value="JZR">Jump if Zero:</option>
+        <option value="STA">Output Reg. A:</option>
+      <select>
+    </div>
+    <div>
+      <label for="txt${id}" id="lbl${id}" class="instructionLabel" style="display: none;">Steps</label>
+      <input type="number"  id="txt${id}" class="instructionText"  style="display: none;" onchange="instructionChange(this)">
+    </div>
   `
   self.queue.appendChild(div)
 
@@ -63,11 +70,11 @@ function loadTest(){
     add()
   }
   
-  self[`sel${self.dataBody.steps[0].id}`].selectedIndex = 2
-  self[`sel${self.dataBody.steps[1].id}`].selectedIndex = 3
-  self[`sel${self.dataBody.steps[2].id}`].selectedIndex = 5
-  self[`sel${self.dataBody.steps[3].id}`].selectedIndex = 1
-  self[`sel${self.dataBody.steps[4].id}`].selectedIndex = 2
+  self[`sel${self.dataBody.steps[0].id}`].selectedIndex = 3
+  self[`sel${self.dataBody.steps[1].id}`].selectedIndex = 4
+  self[`sel${self.dataBody.steps[2].id}`].selectedIndex = 6
+  self[`sel${self.dataBody.steps[3].id}`].selectedIndex = 2
+  self[`sel${self.dataBody.steps[4].id}`].selectedIndex = 3
 
   self[`sel${self.dataBody.steps[0].id}`].onchange()
   self[`sel${self.dataBody.steps[1].id}`].onchange()
@@ -77,6 +84,14 @@ function loadTest(){
 
   self[`txt${self.dataBody.steps[2].id}`].value = 1
   self[`txt${self.dataBody.steps[2].id}`].onchange()
+}
+
+function removeStep(elementID) {
+  var idx  = getIndexForId(elementID)
+  self.dataBody.steps.splice(idx, 1)
+  var parentStepDiv = self[`step${elementID}`]
+  parentStepDiv.remove()
+  resequence()
 }
 
 function instructionChange(t){
@@ -94,9 +109,17 @@ function instructionChange(t){
     txt.style.display = 'none'
 
     if (t.value == 'JMP' || t.value == 'JZR' ) {
+      lbl.innerHTML     = 'Steps'
       lbl.style.display = 'inline'
       txt.style.display = 'inline-block'
     }
+    
+    if (t.value == 'LDA' ) {
+      lbl.innerHTML     = 'Value'
+      lbl.style.display = 'inline'
+      txt.style.display = 'inline-block'
+    }
+
   }
   if (t.tagName == 'INPUT') {
     step.operand = t.value
@@ -121,6 +144,10 @@ function execute(){
     else                                self[`step${step.id}`].scrollIntoView();
 
     switch (select) {
+      case "LDA":
+        self.dataBody.registerA = Number(self[`txt${step.id}`].value)
+        break;
+
       case "INC":
         self.dataBody.registerA++;
         break;
@@ -185,4 +212,12 @@ function getIndexForId(id){
   );
 
   return idx;
+}
+
+function resequence() {
+  for (let i = 0; i < self.dataBody.steps.length; i++) {
+    const step = self.dataBody.steps[i];
+    step.ord = i + 1
+    self[`stt${step.id}`].innerHTML = `Step ${step.ord}`
+  }
 }

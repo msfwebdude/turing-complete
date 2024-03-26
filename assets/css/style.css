@@ -51,14 +51,34 @@ html {
 
 .queue {
   width: 100%;
-  height: 112px;
+  height: 121px;
   background-color: #ccc;
   overflow-x: scroll;
   border: solid 1px #fff;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   white-space: nowrap;
   scroll-behavior: smooth;
+}
+
+.deleteStep {
+  position: relative;
+  display: inline;
+  top: -4px;
+  left: 50px;
+  font-size: 14px;
+  cursor: pointer;
+  color: red;
+}
+
+.deleteStep:hover {
+  background-color: #ff9999;
+  color: #fffffe;
+}
+
+.stepTitle {
+  margin-top: -18px;
+  margin-bottom: 3px;
 }
 
 .status {
@@ -89,8 +109,8 @@ html {
 
 .instruction {
   display: inline-block;
-  height: 71px;
-  width: 112px;
+  height: 79px;
+  width: 124px;
   background-color: #E5E5FF;
   border: solid 1px navy;
   border-radius: 3px;
@@ -129,8 +149,7 @@ html {
   color: #FFFFFE;
   transition: 0.2s;
   border: solid 1px darkgray;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
+  border-radius: 12px;
   width: 184px;
   height: 36px;
   font-size: 12pt;
@@ -153,8 +172,7 @@ html {
   color: #FFFFFE;
   transition: 0.2s;
   border: solid 1px darkgray;
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-radius: 12px;
   width: 184px;
   height: 36px;
   font-size: 12pt;
